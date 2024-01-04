@@ -3,7 +3,7 @@
 // @namespace   ligature.me
 // @match       *://*/*
 // @grant       none
-// @version     1.2.1
+// @version     1.2.2
 // @author      ScytaleZero
 // @description 12/15/2023, 11:52:35 AM
 // @grant       GM_registerMenuCommand
@@ -47,9 +47,9 @@ async function main() {
       const thisUrl = encodeURIComponent(window.location.href)
       try {
         //Store the content as backup
-        GMx_setValue('gpt-summarize-content', document.body.innerText)
+        GM_setValue('gpt-summarize-content', document.body.innerText)
       } catch (e) {
-        alert(e)
+        log(e, true)
       }
       // Open ChatGPT
       const gptUrl = `https://chat.openai.com/?model=gpt-4&summarize=${thisUrl}`
@@ -113,8 +113,23 @@ function waitFor(selector, content) {
   })
 }
 
-function log(message) {
-  console.info(`%c[GPT Utils] `, 'color: blue', message)
+function log(message, isAlert) {
+  if (isAlert) {
+    // Create a new div element
+    var newDiv = document.createElement("div");
+    // Set the message text
+    newDiv.textContent = message
+    // Style the div with a border, center alignment, and other properties
+    newDiv.style.border = "1px solid black"
+    newDiv.style.textAlign = "center"
+    newDiv.style.margin = "10px"
+    newDiv.style.padding = "5px"
+    newDiv.style.backgroundColor = "#f0f0f0" // Light grey background
+    // Insert the new div at the top of the body
+    document.body.insertBefore(newDiv, document.body.firstChild)
+  } else {
+    console.info(`%c[GPT Utils] `, 'color: blue', message)
+  }
 }
 
 function delay(ms) {
