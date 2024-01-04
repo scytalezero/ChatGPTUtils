@@ -3,7 +3,7 @@
 // @namespace   ligature.me
 // @match       *://*/*
 // @grant       none
-// @version     1.2.3
+// @version     1.2.4
 // @author      ScytaleZero
 // @description 12/15/2023, 11:52:35 AM
 // @grant       GM_registerMenuCommand
@@ -51,7 +51,7 @@ async function main() {
         // Open ChatGPT
         const gptUrl = `https://chat.openai.com/?model=gpt-4&summarize=${thisUrl}`
         GM_openInTab(gptUrl)
-        log(gptUrl, true)
+        log(`<a href="${gptUrl}" target="_blank">Summarize with ChatGPT</a>`, true)
       } catch (e) {
         log(e, true)
       }
@@ -119,13 +119,16 @@ function log(message, isAlert) {
     // Create a new div element
     var newDiv = document.createElement("div");
     // Set the message text
-    newDiv.textContent = message
+    newDiv.innerHTML = message
     // Style the div with a border, center alignment, and other properties
     newDiv.style.border = "1px solid black"
     newDiv.style.textAlign = "center"
     newDiv.style.margin = "10px"
     newDiv.style.padding = "5px"
     newDiv.style.backgroundColor = "#f0f0f0" // Light grey background
+    newDiv.style.zIndex = 10000
+    newDiv.style.position = 'relative'
+    newDiv.style.width = '100%'
     // Insert the new div at the top of the body
     document.body.insertBefore(newDiv, document.body.firstChild)
   } else {
