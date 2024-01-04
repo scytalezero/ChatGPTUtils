@@ -3,7 +3,7 @@
 // @namespace   ligature.me
 // @match       *://*/*
 // @grant       none
-// @version     1.2.2
+// @version     1.2.3
 // @author      ScytaleZero
 // @description 12/15/2023, 11:52:35 AM
 // @grant       GM_registerMenuCommand
@@ -48,12 +48,13 @@ async function main() {
       try {
         //Store the content as backup
         GM_setValue('gpt-summarize-content', document.body.innerText)
+        // Open ChatGPT
+        const gptUrl = `https://chat.openai.com/?model=gpt-4&summarize=${thisUrl}`
+        GM_openInTab(gptUrl)
+        log(gptUrl, true)
       } catch (e) {
         log(e, true)
       }
-      // Open ChatGPT
-      const gptUrl = `https://chat.openai.com/?model=gpt-4&summarize=${thisUrl}`
-      GM_openInTab(gptUrl)
     })
 
   }
