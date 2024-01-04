@@ -3,7 +3,7 @@
 // @namespace   ligature.me
 // @match       *://*/*
 // @grant       none
-// @version     1.2
+// @version     1.2.1
 // @author      ScytaleZero
 // @description 12/15/2023, 11:52:35 AM
 // @grant       GM_registerMenuCommand
@@ -45,8 +45,12 @@ async function main() {
     GM_registerMenuCommand('Summarize with GPT', () => {
       // Get the current URL
       const thisUrl = encodeURIComponent(window.location.href)
-      //Store the content as backup
-      GM_setValue('gpt-summarize-content', document.body.innerText)
+      try {
+        //Store the content as backup
+        GMx_setValue('gpt-summarize-content', document.body.innerText)
+      } catch (e) {
+        alert(e)
+      }
       // Open ChatGPT
       const gptUrl = `https://chat.openai.com/?model=gpt-4&summarize=${thisUrl}`
       GM_openInTab(gptUrl)
