@@ -3,7 +3,7 @@
 // @namespace   ligature.me
 // @match       *://*/*
 // @grant       none
-// @version     1.2.4
+// @version     1.2.5
 // @author      ScytaleZero
 // @description 12/15/2023, 11:52:35 AM
 // @grant       GM_registerMenuCommand
@@ -63,7 +63,7 @@ async function main() {
 async function setGpt4() {
   // Wait for it to be GPT 4
   log('Waiting for GPT 4')
-  await waitFor('span.text-token-text-secondary', /4/)
+  await waitFor('div[aria-haspopup="menu"]', /ChatGPT 4/)
 }
 
 async function setInput(content) {
